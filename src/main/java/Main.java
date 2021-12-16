@@ -21,22 +21,6 @@ public class Main {
     public static final int SESSION_TIMEOUT = 2000;
     public static final String PORT = "8080";
 
-    static void printChildrenData(ZooKeeper zoo) throws InterruptedException, KeeperException {
-        List<String> servers = zoo.getChildren("/servers", new Watcher() {
-            public void process(WatchedEvent we) {
-                if(we.getType() == Event.EventType.NodeChildrenChanged) {
-
-                }
-            }
-        });
-        for(String s : servers) {
-            byte[] data = zoo.getData("/zookeeper/" + s, false, null);
-            System.out.println(s + " data=" + new String(data));
-        }
-
-
-
-    }
 
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
         Object lock = new Object();
