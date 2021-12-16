@@ -55,7 +55,7 @@ public class Main {
             }
         };
         ZooKeeper zoo = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
-        zoo.create("/servers/s1", PORT.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+        zoo.create("/servers/s2", PORT.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
         ChildZNodeWatcher watcher = new ChildZNodeWatcher(configStore, zoo);
         watcher.subscribe("/servers");
 
@@ -63,7 +63,7 @@ public class Main {
         Flow<HttpRequest, HttpResponse, NotUsed> flowRoute = httpRoute.GetHttpRoute().flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 flowRoute,
-                ConnectHttp.toHost("localhost", 8080),
+                ConnectHttp.toHost("localhost", 8081),
                 materializer
         );
 
