@@ -1,12 +1,15 @@
 import akka.actor.AbstractActor;
 import akka.japi.pf.ReceiveBuilder;
 
+import java.util.HashMap;
+
 public class StoreActor extends AbstractActor {
-    HashMap<String, Integer> StoreMes
+    StoreMe
+
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match(StoreMessage.class, m -> {
+                .match(HashMap.class, m -> {
 
                 })
                 .build();
@@ -15,7 +18,6 @@ public class StoreActor extends AbstractActor {
 
     public static class StoreMessage{
         int[] ports;
-        String server;
-
+        String[] server;
     }
 }
