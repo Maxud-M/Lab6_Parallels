@@ -5,7 +5,7 @@ import akka.japi.pf.ReceiveBuilder;
 
 import java.util.Random;
 
-public class  extends AbstractActor {
+public class ConfigurationStore extends AbstractActor {
     ServerList servers;
 
     @Override

@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println();
         ActorSystem system = ActorSystem.create();
-        ActorRef storeActor = system.actorOf(Props.create(StoreActor.class));
+        ActorRef storeActor = system.actorOf(Props.create(ConfigurationStore.class));
 
     }
 }
