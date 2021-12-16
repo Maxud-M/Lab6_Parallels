@@ -21,7 +21,10 @@ public class Main {
     public static final int SESSION_TIMEOUT = 2000;
     public static final String PORT = "8080";
 
-    void 
+    void printChildrenData(ZooKeeper zoo) {
+        String[] servers = zoo.getChildren("/servers", );
+
+    }
 
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
         Object lock = new Object();
