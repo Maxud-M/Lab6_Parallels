@@ -17,7 +17,7 @@ public class ConfigurationStore extends AbstractActor {
                 .matchAny(m -> {
                     Random indexGenerator = new Random();
                     int randomIndex = indexGenerator.nextInt(servers.size());
-                    sender().tell(servers.getServer(randomIndex), ActorRef.noSender());
+                    sender().tell(servers.getServer(randomIndex), getSelf());
                 })
                 .build();
 
