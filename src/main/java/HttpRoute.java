@@ -1,6 +1,9 @@
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.http.javadsl.server.Route;
+import akka.pattern.Patterns;
+
+import java.time.Duration;
 
 import static akka.http.javadsl.server.Directives.*;
 
@@ -14,16 +17,22 @@ public class HttpRoute {
         this.system = system;
     }
 
-
+    public static final Duration TIMEOUT = Duration.ofSeconds(5);
     public static final String URL_PARAMETR = "url";
     public static final String COUNT_PARAMETR = "count";
 
     public Route GetHttpRoute() {
         return route(get(() ->
                 parameter(URL_PARAMETR, url -> {
-                    parameter(COUNT_PARAMETR, count -> {
-                        configStore.tell(null, system.);
-                        configStore.c
+                    parameter(COUNT_PARAMETR, countStr -> {
+                        int count = Integer.parseInt(countStr);
+                        if(count == 0) {
+                            AsyncHttpClient
+                        }
+                        Patterns.ask(configStore, null, TIMEOUT)
+                                .thenCompose(response -> {
+                                    String server = String.valueOf(response);
+                                });
 
 
                     });
