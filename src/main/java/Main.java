@@ -26,7 +26,7 @@ public class Main {
         List<String> servers = zoo.getChildren("/servers", new Watcher() {
             public void process(WatchedEvent we) {
                 if(we.getType() == Event.EventType.NodeChildrenChanged) {
-                    System.out.println("closed");
+
                 }
             }
         });
