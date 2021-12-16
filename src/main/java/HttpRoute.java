@@ -7,7 +7,7 @@ import akka.pattern.Patterns;
 import java.time.Duration;
 
 import static akka.http.javadsl.server.Directives.*;
-import static org.asynchttpclient.Dsl.get;
+
 
 public class HttpRoute {
 
@@ -34,6 +34,7 @@ public class HttpRoute {
                         Patterns.ask(configStore, null, TIMEOUT)
                                 .thenCompose(response -> {
                                     String server = String.valueOf(response);
+                                    
                                 });
 
 
