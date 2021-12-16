@@ -8,15 +8,15 @@ public class StoreActor extends AbstractActor {
 
     @Override
     public Receive createReceive() {
-        return ReceiveBuilder.create()
-                .match(HashMap.class, m -> {
+        return ReceiveBuilder.create()  
+                .match(ServerList.class, m -> {
 
                 })
                 .build();
     }
 
 
-    public static class StoreMessage{
+    public static class ServerList{
         int[] ports;
         String[] server;
     }
