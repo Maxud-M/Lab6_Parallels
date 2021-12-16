@@ -23,7 +23,7 @@ public class Main {
     public static final String PORT = "8080";
 
     static void printChildrenData(ZooKeeper zoo) throws InterruptedException, KeeperException {
-        List<String> servers = zoo.getChildren("/servers", new Watcher() {
+        List<String> servers = zoo.getChildren("/", new Watcher() {
             public void process(WatchedEvent we) {
                 if(we.getState() == Event.KeeperState.Closed) {
                     System.out.println("closed");
@@ -31,7 +31,7 @@ public class Main {
             }
         });
         for(String s : servers) {
-            byte[] data = zoo.getData("/servers/" + s, false, null);
+            byte[] data = zoo.getData("/" + s, false, null);
             System.out.println("server" + s + " data=" + new String(data));
         }
 
@@ -52,7 +52,7 @@ public class Main {
             }
         };
         ZooKeeper zoo = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
-        zoo.create("/zookeeper/s1", PORT.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+        zoo.create("/s1", PORT.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
         printChildrenData(zoo);
 
         ActorSystem system = ActorSystem.create();
