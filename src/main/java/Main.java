@@ -30,8 +30,8 @@ public class Main {
                 }
             }
         });
-        for(String str : servers) {
-            byte[] data = zoo.getData("/servers/" + str)
+        for(String s : servers) {
+            byte[] data = zoo.getData("/servers/" + s, false)
         }
 
 
