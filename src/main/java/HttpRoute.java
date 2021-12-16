@@ -1,5 +1,6 @@
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
 
@@ -27,7 +28,7 @@ public class HttpRoute {
                     parameter(COUNT_PARAMETR, countStr -> {
                         int count = Integer.parseInt(countStr);
                         if(count == 0) {
-                            AsyncHttpClient
+                            HttpRequest req = HttpRequest.GET(url);
                         }
                         Patterns.ask(configStore, null, TIMEOUT)
                                 .thenCompose(response -> {
