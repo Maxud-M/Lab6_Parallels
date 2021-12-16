@@ -33,7 +33,7 @@ public class HttpRoute {
                         if(count == 0) {
                             //execute http get request to url
                         }
-                        final Http
+                        final Http http = 
 
 
                     });
