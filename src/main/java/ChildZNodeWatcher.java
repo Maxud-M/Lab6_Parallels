@@ -5,9 +5,7 @@ import org.apache.zookeeper.Watcher;
 public class ChildZNodeWatcher implements Watcher {
 
 
-    ChildZNodeWatcher(ActorRef configStore) {
-
-    }
+    public static void watch()
 
     @Override
     public void process(WatchedEvent watchedEvent) {
