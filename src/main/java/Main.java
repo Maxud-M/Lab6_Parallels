@@ -46,13 +46,11 @@ public class Main {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         ActorRef configStore = system.actorOf(Props.create(ConfigurationStore.class));
         Http http = Http.get(system);
-        Watcher connectionWatcher = new Watcher() {
-            public void process(WatchedEvent we) {
-                if (we.getState() == Event.KeeperState.SyncConnected) {
-                    System.out.println("Connected to Zookeeper in " + Thread.currentThread().getName());
-                    synchronized (lock) {
-                        lock.notifyAll();
-                    }
+        Watcher connectionWatcher = we -> {
+            if (we.getState() == Watcher.Event.KeeperState.SyncConnected) {
+                System.out.println("Connected to Zookeeper in " + Thread.currentThread().getName());
+                synchronized (lock) {
+                    lock.notifyAll();
                 }
             }
         };
