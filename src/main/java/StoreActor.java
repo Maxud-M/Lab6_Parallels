@@ -4,7 +4,7 @@ import akka.japi.pf.ReceiveBuilder;
 import java.util.HashMap;
 
 public class StoreActor extends AbstractActor {
-    StoreMe
+    StoreMessage
 
     @Override
     public Receive createReceive() {
