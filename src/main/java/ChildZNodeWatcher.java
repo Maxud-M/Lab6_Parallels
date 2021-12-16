@@ -6,7 +6,7 @@ import org.apache.zookeeper.ZooKeeper;
 public class ChildZNodeWatcher implements Watcher {
 
 
-    public static void watch(ZooKeeper zoo, )
+    public static void (ZooKeeper zoo, )
 
     @Override
     public void process(WatchedEvent watchedEvent) {
