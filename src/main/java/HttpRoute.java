@@ -6,17 +6,24 @@ import static akka.http.javadsl.server.Directives.*;
 
 public class HttpRoute {
 
-    HttpRoute(ConfigurationStore configStore, ActorSystem system, )
-
     ActorRef configStore;
+    ActorSystem system;
+
+    HttpRoute(ActorRef configStore, ActorSystem system) {
+        this.configStore = configStore;
+        this.system = system;
+    }
+
 
     public static final String URL_PARAMETR = "url";
     public static final String COUNT_PARAMETR = "count";
 
-    public static Route GetHttpRoute() {
+    public Route GetHttpRoute() {
         return route(get(() ->
                 parameter(URL_PARAMETR, url -> {
                     parameter(COUNT_PARAMETR, count -> {
+                        configStore.tell(null, configStore);
+
 
                     });
                 })
