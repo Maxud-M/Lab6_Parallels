@@ -25,6 +25,8 @@ public class StoreActor extends AbstractActor {
             this.servers = servers;
         }
 
-        
+        String buildUrl(int index) {
+            return servers[index] + ':' +
+        }
     }
 }
