@@ -6,11 +6,9 @@ import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
-import org.apache.zookeeper.server.Request;
 
 
 import java.time.Duration;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 import static akka.http.javadsl.server.Directives.*;
@@ -48,11 +46,18 @@ public class HttpRoute {
                                     Jackson.marshaller()
                             );
                         }
-                        CompletableFuture<String> res = Patterns.ask(configStore, null, TIMEOUT)
+                        CompletionStage<HttpResponse> res = Patterns.ask(configStore, null, TIMEOUT)
                                 .thenCompose(response -> {
                                     String server = String.valueOf(response);
-                                    return CompletableFuture.completedFuture(server);
+                                    return fetch(server + "?/" +
+                                            URL_PARAMETR + "=" + url
+                                            + "&" +
+                                            COUNT_PARAMETR + "=" + String.valueOf(count - 1));
                                 });
+                        return completeOKWithFuture(
+                                res,
+                                Jackson.marshaller()
+                        );
                     });
                 })
         )));
