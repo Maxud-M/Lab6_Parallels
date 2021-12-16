@@ -6,7 +6,7 @@ public class ChildZNodeWatcher implements Watcher {
 
 
     ChildZNodeWatcher(ActorRef configStore) {
-        
+
     }
 
     @Override
