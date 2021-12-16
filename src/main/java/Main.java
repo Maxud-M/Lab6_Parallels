@@ -31,7 +31,7 @@ public class Main {
             }
         });
         for(String s : servers) {
-            byte[] data = zoo.getData("/servers/" + s, false)
+            byte[] data = zoo.getData("/servers/" + s, false, null));
         }
 
 
