@@ -23,7 +23,7 @@ public class Main {
     public static final String PORT = "8080";
 
     static void printChildrenData(ZooKeeper zoo) throws InterruptedException, KeeperException {
-        List<String> servers = zoo.getChildren("/", new Watcher() {
+        List<String> servers = zoo.getChildren("/zookeeper", new Watcher() {
             public void process(WatchedEvent we) {
                 if(we.getState() == Event.KeeperState.Closed) {
                     System.out.println("closed");
@@ -31,7 +31,7 @@ public class Main {
             }
         });
         for(String s : servers) {
-            byte[] data = zoo.getData("/" + s, false, null);
+            byte[] data = zoo.getData("/zookeeper/" + s, false, null);
             System.out.println("server" + s + " data=" + new String(data));
         }
 
