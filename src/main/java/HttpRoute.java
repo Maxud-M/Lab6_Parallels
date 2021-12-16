@@ -29,7 +29,7 @@ public class HttpRoute {
     public static final String URL_PARAMETR = "url";
     public static final String COUNT_PARAMETR = "count";
 
-    
+    CompletionStage<M>
 
 
     public Route GetHttpRoute() {
