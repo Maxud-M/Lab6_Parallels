@@ -4,11 +4,11 @@ import akka.japi.pf.ReceiveBuilder;
 import java.util.HashMap;
 
 public class StoreActor extends AbstractActor {
-    StoreMessage
+    ServerList
 
     @Override
     public Receive createReceive() {
-        return ReceiveBuilder.create()  
+        return ReceiveBuilder.create()
                 .match(ServerList.class, m -> {
 
                 })
@@ -18,6 +18,13 @@ public class StoreActor extends AbstractActor {
 
     public static class ServerList{
         int[] ports;
-        String[] server;
+        String[] servers;
+
+        ServerList(int[] ports, String[] server) {
+            this.ports = ports;
+            this.servers = servers;
+        }
+
+        
     }
 }
