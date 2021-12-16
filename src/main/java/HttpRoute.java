@@ -3,6 +3,7 @@ import akka.actor.ActorSystem;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.HttpRequest;
+import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
 import org.apache.zookeeper.server.Request;
@@ -30,7 +31,7 @@ public class HttpRoute {
     public static final String COUNT_PARAMETR = "count";
 
     CompletionStage<HttpResponse> fetch(String url) {
-        return http.singleRequest()
+        return http.singleRequest(HttpRequest.create(url));
     }
 
 
