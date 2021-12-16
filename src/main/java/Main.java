@@ -57,7 +57,7 @@ public class Main {
         ZooKeeper zoo = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
         zoo.create("/servers/s1", PORT.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
         ChildZNodeWatcher watcher = new ChildZNodeWatcher(configStore, zoo);
-        watcher.subscribe("/servers/s1");
+        watcher.subscribe("/servers");
 
         HttpRoute httpRoute = new HttpRoute(configStore, http);
         Flow<HttpRequest, HttpResponse, NotUsed> flowRoute = httpRoute.GetHttpRoute().flow(system, materializer);
