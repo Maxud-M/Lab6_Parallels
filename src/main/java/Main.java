@@ -19,9 +19,10 @@ import java.util.concurrent.CompletionStage;
 
 public class Main {
 
-    public static final String ZOOKEEPER_SERVER = "127.0.0.1:2181"
+    public static final String ZOOKEEPER_SERVER = "127.0.0.1:2181";
 
     public static void main(String[] args) throws IOException {
+        Object lock = new Object();
         Watcher connectionWatcher = new Watcher() {
             public void process(WatchedEvent we) {
                 if (we.getState() == Event.KeeperState.SyncConnected) {
@@ -32,7 +33,7 @@ public class Main {
                 }
             }
         };
-        ZooKeeper zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, 2000, )
+        ZooKeeper zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, 2000, connectionWatcher);
         ActorSystem system = ActorSystem.create();
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         ActorRef configStore = system.actorOf(Props.create(ConfigurationStore.class));
