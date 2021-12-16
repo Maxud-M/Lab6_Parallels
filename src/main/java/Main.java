@@ -7,6 +7,7 @@ public class Main {
         System.out.println();
         ActorSystem system = ActorSystem.create();
         ActorRef storeActor = system.actorOf(Props.create(ConfigurationStore.class));
+        Http http = Http.get(system)
 
     }
 }
