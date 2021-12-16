@@ -10,6 +10,7 @@ import org.apache.zookeeper.server.Request;
 
 
 import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 import static akka.http.javadsl.server.Directives.*;
@@ -47,7 +48,11 @@ public class HttpRoute {
                                     Jackson.marshaller()
                             );
                         }
-                        Patterns.ask(configStore, null, )
+                        CompletableFuture<String> res = Patterns.ask(configStore, null, TIMEOUT)
+                                .thenCompose(response -> {
+                                    String server = String.valueOf(response);
+                                    return CompletableFuture.completedFuture(server);
+                                });
                     });
                 })
         )));
