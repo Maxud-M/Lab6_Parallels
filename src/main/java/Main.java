@@ -25,7 +25,7 @@ public class Main {
     static void printChildrenData(ZooKeeper zoo) throws InterruptedException, KeeperException {
         List<String> servers = zoo.getChildren("/zookeeper", new Watcher() {
             public void process(WatchedEvent we) {
-                if(we.getState() == Event.KeeperState.Closed) {
+                if(we.getType() == Event.EventType.NodeChildrenChanged) {
                     System.out.println("closed");
                 }
             }
