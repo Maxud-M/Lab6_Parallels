@@ -6,6 +6,11 @@ import org.apache.zookeeper.ZooKeeper;
 
 public class ChildZNodeWatcher implements Watcher {
 
+    private ActorRef configStore;
+
+    ChildZNodeWatcher(ActorRef configStore) {
+        this.configStore = configStore;
+    }
 
     public void subscribe(ZooKeeper zoo, String path) throws InterruptedException, KeeperException {
         zoo.getChildren(path, this);
