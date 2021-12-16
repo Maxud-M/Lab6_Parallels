@@ -10,6 +10,7 @@ import org.apache.zookeeper.server.Request;
 
 
 import java.time.Duration;
+import java.util.concurrent.CompletionStage;
 
 import static akka.http.javadsl.server.Directives.*;
 
@@ -43,7 +44,10 @@ public class HttpRoute {
                         if(count == 0) {
                             //execute http get request to url
                         }
-                        http.singleRequest(HttpRequest.create(url));
+                        return completeWithFuture(
+                                fetch(url),
+
+                        )
 
 
                     });
