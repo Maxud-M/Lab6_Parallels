@@ -39,20 +39,17 @@ public class HttpRoute {
     public Route GetHttpRoute() {
         return route((get(() ->
                 parameter(URL_PARAMETR, url -> {
-                    parameter(COUNT_PARAMETR, countStr -> {
+                    return parameter(COUNT_PARAMETR, countStr -> {
                         int count = Integer.parseInt(countStr);
                         if(count == 0) {
-                            //execute http get request to url
+                            return completeOKWithFuture(
+                                    fetch(url),
+                                    Jackson.marshaller()
+                            );
                         }
-                        return completeWithFuture(
-                                fetch(url),
-
-                        )
-
-
+                        Patterns.ask(configStore, null, )
                     });
                 })
-                )
-        );
+        )));
     }
 }
