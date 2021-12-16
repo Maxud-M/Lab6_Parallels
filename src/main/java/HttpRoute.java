@@ -33,23 +33,8 @@ public class HttpRoute {
                         if(count == 0) {
                             //execute http get request to url
                         }
-                        CompletionStage<HttpResponse> res = Patterns.ask(configStore, null, TIMEOUT)
-                                .thenCompose(response -> {
-                                    String server = String.valueOf(response);
-                                    server += "/?" +
-                                            URL_PARAMETR + "=" + url
-                                            + "&" +
-                                            COUNT_PARAMETR + "=" + String.valueOf(count - 1);
-                                    AsyncHttpClient asyncHttpClient = asyncHttpClient();
-                                    Request req = get(url).build();
-                                    return completeWithFuture(
-                                            asyncHttpClient.executeRequest(req),
-                                            Jackson.marshaller()
-                                    );
+                        Request request = get(reqEntity.first()).build();
 
-                                    //execute htttp get request to server
-                                    return res
-                                });
 
 
                     });
