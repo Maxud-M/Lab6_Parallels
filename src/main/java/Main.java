@@ -10,6 +10,8 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.stream.ActorMaterializer;
 import akka.stream.Materializer;
 import akka.stream.javadsl.Flow;
+import org.apache.zookeeper.Watcher;
+import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
 import java.util.concurrent.CompletionStage;
@@ -28,6 +30,7 @@ public class Main {
                 ConnectHttp.toHost("localhost", 8080),
                 materializer
         );
+        
         System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
         System.in.read();
         binding
