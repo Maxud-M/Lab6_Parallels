@@ -2,6 +2,7 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.marshallers.jackson.Jackson;
+import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
 import org.apache.zookeeper.server.Request;
@@ -36,7 +37,7 @@ public class HttpRoute {
                         if(count == 0) {
                             //execute http get request to url
                         }
-                        http.singleRequest()
+                        http.singleRequest(HttpRequest)
 
 
                     });
