@@ -37,7 +37,7 @@ public class HttpRoute {
                         if(count == 0) {
                             //execute http get request to url
                         }
-                        http.singleRequest(HttpRequest)
+                        http.singleRequest(HttpRequest.create(url));
 
 
                     });
