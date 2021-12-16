@@ -2,7 +2,7 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.japi.pf.ReceiveBuilder;
 
-import java.util.HashMap;
+
 import java.util.Random;
 
 public class StoreActor extends AbstractActor {
