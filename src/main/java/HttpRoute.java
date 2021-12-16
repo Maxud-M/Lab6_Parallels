@@ -1,5 +1,6 @@
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.http.javadsl.Http;
 import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
@@ -15,10 +16,12 @@ public class HttpRoute {
 
     ActorRef configStore;
     ActorSystem system;
+    Http http;
 
-    HttpRoute(ActorRef configStore, ActorSystem system) {
+    HttpRoute(ActorRef configStore, ActorSystem system, Http http) {
         this.configStore = configStore;
         this.system = system;
+        this.http = http;
     }
 
     public static final Duration TIMEOUT = Duration.ofSeconds(5);
@@ -33,7 +36,7 @@ public class HttpRoute {
                         if(count == 0) {
                             //execute http get request to url
                         }
-                        final Http http = Http.get(context().system())
+                        
 
 
                     });
