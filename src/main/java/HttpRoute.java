@@ -1,9 +1,12 @@
 import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
 import akka.http.javadsl.server.Route;
 
 import static akka.http.javadsl.server.Directives.*;
 
 public class HttpRoute {
+
+    HttpRoute(ConfigurationStore configStore, ActorSystem system, )
 
     ActorRef configStore;
 
