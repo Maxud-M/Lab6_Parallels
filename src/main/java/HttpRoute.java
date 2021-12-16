@@ -17,12 +17,10 @@ import static akka.http.javadsl.server.Directives.*;
 public class HttpRoute {
 
     ActorRef configStore;
-    ActorSystem system;
     Http http;
 
-    HttpRoute(ActorRef configStore, ActorSystem system, Http http) {
+    HttpRoute(ActorRef configStore, Http http) {
         this.configStore = configStore;
-        this.system = system;
         this.http = http;
     }
 
