@@ -12,6 +12,7 @@ import akka.stream.Materializer;
 import akka.stream.javadsl.Flow;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
+import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class Main {
             }
         };
         ZooKeeper zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
-        zooKeeper.create("/servers/s1", PORT.getBytes()), acls
+        zooKeeper.create("/servers/s1", PORT.getBytes()), ZooDefs.Ids.OPEN_ACL_UNSAFE, 
         ActorSystem system = ActorSystem.create();
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         ActorRef configStore = system.actorOf(Props.create(ConfigurationStore.class));
