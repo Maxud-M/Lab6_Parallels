@@ -22,7 +22,7 @@ public class Main {
     public static final int SESSION_TIMEOUT = 2000;
     public static final String PORT = "8080";
 
-    void printChildrenData(ZooKeeper zoo) throws InterruptedException, KeeperException {
+    static void printChildrenData(ZooKeeper zoo) throws InterruptedException, KeeperException {
         List<String> servers = zoo.getChildren("/servers", new Watcher() {
             public void process(WatchedEvent we) {
                 if(we.getState() == Event.KeeperState.Closed) {
@@ -53,7 +53,7 @@ public class Main {
         };
         ZooKeeper zoo = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
         zoo.create("/servers/s1", PORT.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
-        String[] servers = zoo.getChildren("/servers", this);
+        printChildrenData(zoo);
 
         ActorSystem system = ActorSystem.create();
         final ActorMaterializer materializer = ActorMaterializer.create(system);
