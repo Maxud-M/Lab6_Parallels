@@ -14,7 +14,10 @@ public class StoreActor extends AbstractActor {
                     servers = m;
                 })
                 .matchAny(m -> {
-                    new Random().nextInt(servers.si);
+                    Random indexGenerator = new Random();
+                    int randomIndex = indexGenerator.nextInt(servers.size());
+                    
+
                 })
                 .build();
 
