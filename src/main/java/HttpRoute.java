@@ -32,12 +32,16 @@ public class HttpRoute {
                         if(count == 0) {
                             //execute http get request to url
                         }
-                        Patterns.ask(configStore, null, TIMEOUT)
+                        CompletionStage<HttpResponse> res = Patterns.ask(configStore, null, TIMEOUT)
                                 .thenCompose(response -> {
                                     String server = String.valueOf(response);
-                                    server += "/?" + URL_PARAMETR + "=" + url + "&" + COUNT_PARAMETR + "=" + String.valueOf(count - 1);
-                                    Request req = new Request();
-                                 });
+                                    server += "/?" +
+                                            URL_PARAMETR + "=" + url
+                                            + "&" +
+                                            COUNT_PARAMETR + "=" + String.valueOf(count - 1);
+                                    //execute htttp get request to server
+                                    return
+                                });
 
 
                     });
