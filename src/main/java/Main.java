@@ -22,7 +22,7 @@ public class Main {
     public static final String PORT = "8080";
 
     void printChildrenData(ZooKeeper zoo) {
-        String[] servers = zoo.getChildren("/servers",  );
+        String[] servers = zoo.getChildren("/servers", );
 
     }
 
