@@ -31,8 +31,8 @@ public class HttpRoute {
                     parameter(COUNT_PARAMETR, countStr -> {
                         int count = Integer.parseInt(countStr);
                         if(count == 0) {
-                            HttpRequest req = HttpRequest.GET(url);
-                            HttpResponse res = HttpResponse.create().
+                            AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+
                         }
                         Patterns.ask(configStore, null, TIMEOUT)
                                 .thenCompose(response -> {
