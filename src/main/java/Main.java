@@ -10,6 +10,7 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.stream.ActorMaterializer;
 import akka.stream.Materializer;
 import akka.stream.javadsl.Flow;
+import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
@@ -21,6 +22,16 @@ public class Main {
     public static final String ZOOKEEPER_SERVER = "127.0.0.1:2181"
 
     public static void main(String[] args) throws IOException {
+        Watcher connectionWatcher = new Watcher() {
+            public void process(WatchedEvent we) {
+                if (we.getState() == Event.KeeperState.SyncConnected) {
+                    System.out.println("Connected to Zookeeper in " + Thread.currentThread().getName());
+                    synchronized (lock) {
+                        lock.notifyAll();
+                    }
+                }
+            }
+        };
         ZooKeeper zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, 2000, )
         ActorSystem system = ActorSystem.create();
         final ActorMaterializer materializer = ActorMaterializer.create(system);
