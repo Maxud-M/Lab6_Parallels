@@ -2,6 +2,7 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
+import org.apache.zookeeper.server.Request;
 
 
 import java.time.Duration;
@@ -34,8 +35,9 @@ public class HttpRoute {
                         Patterns.ask(configStore, null, TIMEOUT)
                                 .thenCompose(response -> {
                                     String server = String.valueOf(response);
-                                    
-                                });
+                                    server += "/?" + URL_PARAMETR + "=" + url + "&" + COUNT_PARAMETR + "=" + String.valueOf(count - 1);
+                                    Request req = new Request();
+                                 });
 
 
                     });

@@ -33,6 +33,7 @@ public class ConfigurationStore extends AbstractActor {
             this.names = names;
         }
 
+
         String getServer(int index) {
             return buildUrl(index);
         }
