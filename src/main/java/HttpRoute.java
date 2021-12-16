@@ -22,7 +22,7 @@ public class HttpRoute {
         return route(get(() ->
                 parameter(URL_PARAMETR, url -> {
                     parameter(COUNT_PARAMETR, count -> {
-                        configStore.tell(null, configStore);
+                        configStore.tell(null, ActorRef.noSender());
 
 
                     });
