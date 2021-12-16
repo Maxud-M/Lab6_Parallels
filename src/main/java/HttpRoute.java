@@ -1,5 +1,6 @@
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
 import org.apache.zookeeper.server.Request;
@@ -39,7 +40,13 @@ public class HttpRoute {
                                             URL_PARAMETR + "=" + url
                                             + "&" +
                                             COUNT_PARAMETR + "=" + String.valueOf(count - 1);
-                                    
+                                    AsyncHttpClient asyncHttpClient = asyncHttpClient();
+                                    Request req = get(url).build();
+                                    return completeWithFuture(
+                                            asyncHttpClient.execute(req),
+                                            Jackson.marshaller()
+                                    );
+
                                     //execute htttp get request to server
                                     return res
                                 });
