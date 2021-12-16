@@ -30,7 +30,7 @@ public class Main {
                 }
             }
         });
-        for(str : servers) {
+        for(String str : servers) {
             
         }
 
