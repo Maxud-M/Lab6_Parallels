@@ -36,7 +36,7 @@ public class Main {
             }
         };
         ZooKeeper zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
-        zooKeeper.create("/servers/s1", PORT.getBytes()), 
+        zooKeeper.create("/servers/s1", PORT.getBytes()), acls
         ActorSystem system = ActorSystem.create();
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         ActorRef configStore = system.actorOf(Props.create(ConfigurationStore.class));
