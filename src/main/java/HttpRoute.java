@@ -4,6 +4,8 @@ import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
+import org.asynchttpclient.AsyncHttpClient;
+
 
 import java.time.Duration;
 
