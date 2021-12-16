@@ -18,7 +18,7 @@ import java.util.concurrent.CompletionStage;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        ZooKeeper zooKeeper = new ZooKeeper("localhost:2181")
+        ZooKeeper zooKeeper = new ZooKeeper("localhost:2181", 2000, )
         ActorSystem system = ActorSystem.create();
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         ActorRef configStore = system.actorOf(Props.create(ConfigurationStore.class));
