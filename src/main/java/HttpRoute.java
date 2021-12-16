@@ -29,7 +29,9 @@ public class HttpRoute {
     public static final String URL_PARAMETR = "url";
     public static final String COUNT_PARAMETR = "count";
 
-    CompletionStage<HttpResponse> fetch()
+    CompletionStage<HttpResponse> fetch(String url) {
+        return http.singleRequest()
+    }
 
 
     public Route GetHttpRoute() {
