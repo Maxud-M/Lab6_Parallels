@@ -36,7 +36,7 @@ public class HttpRoute {
                         if(count == 0) {
                             //execute http get request to url
                         }
-                        CompletionStage<HttpResponse> 
+                        CompletionStage<HttpResponse> fetch()
 
 
                     });
