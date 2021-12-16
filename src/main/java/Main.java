@@ -18,7 +18,7 @@ import java.util.concurrent.CompletionStage;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        System.out.println();
+        ZooKeeper zooKeeper = new ZooKeeper("localhost:2181")
         ActorSystem system = ActorSystem.create();
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         ActorRef configStore = system.actorOf(Props.create(ConfigurationStore.class));
@@ -30,7 +30,7 @@ public class Main {
                 ConnectHttp.toHost("localhost", 8080),
                 materializer
         );
-        
+
         System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
         System.in.read();
         binding
