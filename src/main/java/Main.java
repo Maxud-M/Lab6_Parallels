@@ -41,6 +41,11 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
         Object lock = new Object();
+
+        ActorSystem system = ActorSystem.create();
+        final ActorMaterializer materializer = ActorMaterializer.create(system);
+        ActorRef configStore = system.actorOf(Props.create(ConfigurationStore.class));
+        Http http = Http.get(system);
         Watcher connectionWatcher = new Watcher() {
             public void process(WatchedEvent we) {
                 if (we.getState() == Event.KeeperState.SyncConnected) {
@@ -53,11 +58,9 @@ public class Main {
         };
         ZooKeeper zoo = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
         zoo.create("/servers/s1", PORT.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+        ChildZNodeWatcher watcher = new ChildZNodeWatcher(configStore, zoo);
+        watcher.subscribe("/servers/s1");
 
-        ActorSystem system = ActorSystem.create();
-        final ActorMaterializer materializer = ActorMaterializer.create(system);
-        ActorRef configStore = system.actorOf(Props.create(ConfigurationStore.class));
-        Http http = Http.get(system);
         HttpRoute httpRoute = new HttpRoute(configStore, http);
         Flow<HttpRequest, HttpResponse, NotUsed> flowRoute = httpRoute.GetHttpRoute().flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(

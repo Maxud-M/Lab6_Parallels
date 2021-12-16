@@ -26,11 +26,9 @@ public class ConfigurationStore extends AbstractActor {
 
     public static class ServerList{
         private int[] ports;
-        private String[] names;
 
-        ServerList(int[] ports, String[] names) {
+        ServerList(int[] ports) {
             this.ports = ports;
-            this.names = names;
         }
 
 
@@ -39,7 +37,7 @@ public class ConfigurationStore extends AbstractActor {
         }
 
         private String buildUrl(int index) {
-            return names[index] + ':' + ports[index];
+            return "127.0.0.1" + ':' + ports[index];
         }
 
         int size() {
