@@ -31,7 +31,7 @@ public class Main {
             }
         });
         for(String str : servers) {
-            byte[] data = 
+            byte[] data = zoo.getData() 
         }
 
 
