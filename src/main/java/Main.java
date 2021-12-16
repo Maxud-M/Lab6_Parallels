@@ -54,7 +54,7 @@ public class Main {
         ZooKeeper zoo = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
         zoo.create("/servers/s1", PORT.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
         printChildrenData(zoo);
-        zoo.delete("/servers/s1", )
+        zoo.delete("/servers/s1", );
 
         /*ActorSystem system = ActorSystem.create();
         final ActorMaterializer materializer = ActorMaterializer.create(system);
