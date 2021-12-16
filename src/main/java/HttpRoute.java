@@ -43,7 +43,7 @@ public class HttpRoute {
                                     AsyncHttpClient asyncHttpClient = asyncHttpClient();
                                     Request req = get(url).build();
                                     return completeWithFuture(
-                                            asyncHttpClient.execute(req),
+                                            asyncHttpClient.executeRequest(req),
                                             Jackson.marshaller()
                                     );
 
