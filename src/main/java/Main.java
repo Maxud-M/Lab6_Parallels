@@ -32,7 +32,7 @@ public class Main {
         });
         for(String s : servers) {
             byte[] data = zoo.getData("/servers/" + s, false, null);
-            System.out.println("server" + s + " data = ");
+            System.out.println("server" + s + " data=" + );
         }
 
 
