@@ -1,4 +1,5 @@
 import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
 import akka.japi.pf.ReceiveBuilder;
 
 import java.util.HashMap;
@@ -16,8 +17,7 @@ public class StoreActor extends AbstractActor {
                 .matchAny(m -> {
                     Random indexGenerator = new Random();
                     int randomIndex = indexGenerator.nextInt(servers.size());
-                    
-
+                    sender().tell(servers.getServer(randomIndex), ActorRef.noSender());
                 })
                 .build();
 
@@ -33,16 +33,12 @@ public class StoreActor extends AbstractActor {
             this.names = names;
         }
 
-        String buildUrl(int index) {
-            return names[index] + ':' + ports[index];
-        }
-
-        int getPort(int index) {
-            return ports[index];
-        }
-
         String getServer(int index) {
-            return names[index];
+            return buildUrl(index);
+        }
+
+        private String buildUrl(int index) {
+            return names[index] + ':' + ports[index];
         }
 
         int size() {
