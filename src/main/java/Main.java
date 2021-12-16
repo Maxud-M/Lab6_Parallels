@@ -13,6 +13,7 @@ import akka.stream.javadsl.Flow;
 import org.apache.zookeeper.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 public class Main {
@@ -21,8 +22,19 @@ public class Main {
     public static final int SESSION_TIMEOUT = 2000;
     public static final String PORT = "8080";
 
-    void printChildrenData(ZooKeeper zoo) {
-        String[] servers = zoo.getChildren("/servers", );
+    void printChildrenData(ZooKeeper zoo) throws InterruptedException, KeeperException {
+        List<String> servers = zoo.getChildren("/servers", new Watcher() {
+            public void process(WatchedEvent we) {
+                if(we.getState() == Event.KeeperState.Closed) {
+                    System.out.println("closed");
+                }
+            }
+        });
+        for(str : servers) {
+            
+        }
+
+
 
     }
 
