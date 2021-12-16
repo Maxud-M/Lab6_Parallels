@@ -21,7 +21,7 @@ public class Main {
     public static final int SESSION_TIMEOUT = 2000;
     public static final String PORT = 8080;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
         Object lock = new Object();
         Watcher connectionWatcher = new Watcher() {
             public void process(WatchedEvent we) {
@@ -33,8 +33,8 @@ public class Main {
                 }
             }
         };
-        ZooKeeper zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
-        zooKeeper.create("/servers/s1", PORT.getBytes()), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+        ZooKeeper zoo = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
+        zoo.create("/servers/s1", PORT.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
         ActorSystem system = ActorSystem.create();
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         ActorRef configStore = system.actorOf(Props.create(ConfigurationStore.class));
