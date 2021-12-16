@@ -1,2 +1,2 @@
-public class ChildZNodeWatcher {
+public class ChildZNodeWatcher implements {
 }
